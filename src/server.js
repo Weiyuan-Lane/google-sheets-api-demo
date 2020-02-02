@@ -25,7 +25,7 @@ app.get('/docs/:id/sheets/:sheetName/range/:range', async function(req, res) {
   sheets.spreadsheets.values.get({
     auth: googleClient,
     spreadsheetId: req.params.id,
-    range: `${req.params.sheetName}!${req.params.range}`,
+    range: `'${req.params.sheetName}'!${req.params.range}`,
   }, (err, apiRes) => {
     if (err) {
       console.error('The API returned an error.');

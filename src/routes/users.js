@@ -14,7 +14,7 @@ const sheetDatabaseName = process.env.USERS_SHEET_DATABASE_ID;
 // Only A and B (representing two columns) from the table are used
 // A : email
 // B : name
-const usersModelRange = `${process.env.USERS_SHEET_ID}!A1:B`;
+const usersModelRange = `'${process.env.USERS_SHEET_ID}'!A1:B`;
 const sheetId = 0;
 
 router.get('', async function(_, res) {
