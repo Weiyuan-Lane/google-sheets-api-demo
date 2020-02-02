@@ -20,3 +20,6 @@ This demo shows a simple application of node API for google sheets, and being ab
    3.  USERS_SHEET_DATABASE_ID - google sheet id from end of step 7. I found the id directly from the URL when accessing the sheet.
    4.  USERS_SHEET_ID - name of the active sheet that will act as your "users" table.
 
+## Development
+
+Run `npm run start` to start the server in your local machine!
