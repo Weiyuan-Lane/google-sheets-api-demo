@@ -1,0 +1,25 @@
+{
+  "name": "google-sheets-api-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Weiyuan-Lane/google-sheets-api-demo.git"
+  },
+  "author": "Weiyuan Liu",
+  "bugs": {
+    "url": "https://github.com/Weiyuan-Lane/google-sheets-api-demo/issues"
+  },
+  "homepage": "https://github.com/Weiyuan-Lane/google-sheets-api-demo#readme",
+  "dependencies": {
+    "body-parser": "~1.19.0",
+    "dotenv": "~8.2.0",
+    "ejs": "~3.0.1",
+    "express": "~4.17.1",
+    "googleapis": "~47.0.0"
+  }
+}

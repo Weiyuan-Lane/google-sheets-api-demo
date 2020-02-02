@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <title>Users</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <style>
+      .spacing-demo {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Demo Google Sheets</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/users">Users Demo</a>
+          </li>
+      </div>
+    </nav>
+
+    <div class="container" style="margin-top: 10px;">
+      <button type="button" class="btn btn-primary spacing-demo" data-toggle="modal" data-target="#createUserModal">Create User</button>
+      <div class="row">
+        <% for (var i = 0; i < rows.length; i++) { %>
+          <div class="card col-md-3">
+            <div class="card-body" style="text-align: center;">
+              <h5 class="card-title"><%= rows[i].value[0] %></h5>
+              <p class="card-text">Name: <b><%= rows[i].value[1] %></b></p>
+              <a href="#" class="btn btn-danger" onclick="deleteUser(<%= rows[i].id %>)">Delete User</a>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Create User Modal -->
+    <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createUserModalLabel">Create New User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="createUserEmailInput" class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="createUserEmailInput">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="createUserNameInput" class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="createUserNameInput">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="saveUser()">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function saveUser() {
+        $('#createUserModal').modal('hide');
+
+        const email = $('#createUserEmailInput').val();
+        const name = $('#createUserNameInput').val();
+
+        $('#createUserEmailInput').val('');
+        $('#createUserNameInput').val('');
+
+        if (email && name) {
+          $.ajax({
+            url: '/users',
+            method: 'POST',
+            dataType : 'text',
+            contentType: 'application/json',
+            data: JSON.stringify({ 
+              email: email,
+              name: name,
+            })
+          }).done(function() {
+            window.location.reload();
+          });
+        }
+      }
+
+      function deleteUser(id) {
+        if (typeof id === 'number') {
+          $.ajax({
+            url: '/users/' + id,
+            method: 'DELETE'
+          }).done(function() {
+            window.location.reload();
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
