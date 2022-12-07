@@ -16,10 +16,10 @@
   },
   "homepage": "https://github.com/Weiyuan-Lane/google-sheets-api-demo#readme",
   "dependencies": {
-    "body-parser": "~1.19.0",
+    "body-parser": "~1.19.2",
     "dotenv": "~8.2.0",
     "ejs": "~3.0.1",
-    "express": "~4.17.1",
+    "express": "~4.17.3",
     "googleapis": "~47.0.0"
   }
 }
